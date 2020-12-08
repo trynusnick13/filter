@@ -23,8 +23,9 @@ class ImageFilter(Filter):
 
 class CompoundFilter(Filter):
 
-    def __init__(self, filters):
-        self.filters = filters
+    def __init__(self, image):
+        self.filters = []
+        self.image = image
 
     def apply_filter(self):
         # handover execution to the filters in the filters list
