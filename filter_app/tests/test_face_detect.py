@@ -1,8 +1,7 @@
 from filter_app.filters.face_detect_filter import FaceDetectFilter
 import PIL
 
-# "/Users/nicktrynus/Projects/filter/filter_app/filters/haarcascade_frontalface_default.xml"
-"filter_app/filters/haarcascade_frontalface_default.xml"
+
 def test_faces_png():
     pil_image = PIL.Image.open('./test_data/photos/test1.png')
     testing_filter = FaceDetectFilter(pil_image, 'face detect filter')

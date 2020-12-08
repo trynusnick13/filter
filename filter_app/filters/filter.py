@@ -1,7 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
 
-
 class Filter(metaclass=ABCMeta):
 
     def __init__(self, image):
@@ -30,4 +29,3 @@ class CompoundFilter(Filter):
     def apply_filter(self):
         # handover execution to the filters in the filters list
         pass
-    
