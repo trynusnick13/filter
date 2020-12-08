@@ -1,6 +1,8 @@
 class Image:
-    def __init__(self, name, pixels):
+    def __init__(self, name, pillow_image):
+        self.name = name
+        self.pillow_image = pillow_image
+
+    def save_file(self, path='./', name='untitled1'):
         pass
 
-    def save_file(self, path):
-        pass
