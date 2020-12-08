@@ -1,8 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 
-@ABCMeta
-class Command:
+class Command(metaclass=ABCMeta):
 
     def __init__(self, image, backup, args, kwargs):
         pass

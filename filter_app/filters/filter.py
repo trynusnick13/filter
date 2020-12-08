@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
 
-@ABCMeta
-class Filter:
+
+class Filter(metaclass=ABCMeta):
 
     def __init__(self, image):
         pass
