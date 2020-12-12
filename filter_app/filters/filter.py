@@ -32,15 +32,13 @@ class CompoundFilter(Filter):
     def apply_filter(self):
         while True:
             print(self.filters.keys())
-            filter_ = input("Choose Filter or enter 1 to exit ")
+            filter_ = input("Choose FILTER or enter 1 to exit ")
 
             if filter_ == "1":
                 break
             elif filter_ in self.filters:
                 if self.filters[filter_] is Command:
                     self.filters[filter_].execute()
-                else:
-                    self.filters[filter_].apply_filter()
 
     def add(self, filter_):
         self.filters[filter_.name] = filter_

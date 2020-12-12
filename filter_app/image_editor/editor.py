@@ -20,7 +20,7 @@ class ImageEditor:
     def load_image(self):
         root = tk.Tk()
         root.withdraw()
-        file_path = filedialog.askopenfilename()            # asking a user for file path using built-in tkinter
+        file_path = tk.filedialog.askopenfilename()            # asking a user for file path using built-in tkinter
         file_path_copy = deepcopy(file_path)                # copy for file name, in order to save original path intact
         file_path_to_open = file_path                       # file path to one specific photo
         im = pillowImg.open(file_path_to_open)              # opening photo using Pillow 8.0.1
@@ -28,6 +28,10 @@ class ImageEditor:
         file_name = tail[1]                                 # getting file name from file path
         self.image = Image(file_name, im)
         # print(tail[1], im.format, im.mode, im.size)
+        file_path = None
+        file_path_copy = None
+        file_path_to_open = None
+        tail = None
 
     def create_chain(self, commands, name):
         chain1 = CompoundFilter(name)
@@ -41,23 +45,20 @@ class ImageEditor:
     def user_input(self):
         while True:
             print(self.dict_of_chains.keys())
-            action = input("Choose Action or enter 1 to exit")
+            action = input("Choose ACTION or enter 1 to exit")
             if action == "1":
                 break
             elif action in self.dict_of_chains.keys():
                 self.dict_of_chains[action].apply_filter()
 
     def filtering(self):
+        self.load_image()
         while True:
-            print("Choose photo enter 2 or enter 1 to exit")
-            a = input()
-            if '2' in a:
-                self.load_image()
+            if True:
                 self.create_facedetec_chain()
                 self.user_input()
-            if '1' in a:
+                self.image.save_file()
+            print("Enter 1 to exit")
+            a = input()
+            if a == '1':
                 break
-
-if __name__ == '__main__':
-    app = ImageEditor()
-    app.filtering()

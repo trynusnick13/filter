@@ -3,6 +3,5 @@ class Image:
         self.name = name
         self.pillow_image = pillow_image
 
-    def save_file(self, path='./', name='untitled1'):
-        pass
-
+    def save_file(self, path='./', name='untitled1.png'):
+        self.pillow_image.save(name)
