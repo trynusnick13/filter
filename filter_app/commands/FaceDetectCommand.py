@@ -6,8 +6,9 @@ import PIL
 
 class FaceDetectCommand(ConcreteCommand):
 
-    def __init__(self, image):
+    def __init__(self, image, name=None):
         self.image = image
+        self.name = name
 
     def undo(self):
         self.image = self.backup

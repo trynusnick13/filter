@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from filter_app.commands import *
-
+from filter_app.commands.command import Command
 
 class Filter(metaclass=ABCMeta):
 
@@ -25,14 +25,22 @@ class ImageFilter(Filter):
 class CompoundFilter(Filter):
 
     def __init__(self, name, image=None):
-        self.filters = []
+        self.filters = {}
         self.image = image
         self.name = name
 
     def apply_filter(self):
-        # handover execution to the filters in the filters list
-        pass
+        while True:
+            print(self.filters.keys())
+            filter_ = input("Choose Filter or enter 1 to exit ")
+
+            if filter_ == "1":
+                break
+            elif filter_ in self.filters:
+                if self.filters[filter_] is Command:
+                    self.filters[filter_].execute()
+                else:
+                    self.filters[filter_].apply_filter()
 
     def add(self, filter_):
-        self.filters.append(filter_)
-        pass
+        self.filters[filter_.name] = filter_
