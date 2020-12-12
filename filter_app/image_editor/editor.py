@@ -49,13 +49,13 @@ class ImageEditor:
 
     def filtering(self):
         while True:
-            print("Choose photo enter a or enter 1 to exit")
-            # a = input()
-            if True:
+            print("Choose photo enter 2 or enter 1 to exit")
+            a = input()
+            if '2' in a:
                 self.load_image()
                 self.create_facedetec_chain()
                 self.user_input()
-            if False:
+            if '1' in a:
                 break
 
 if __name__ == '__main__':
