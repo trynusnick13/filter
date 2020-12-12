@@ -31,7 +31,9 @@ class CompoundFilter(Filter):
 
     def apply_filter(self):
         while True:
+            print(self.filters.keys())
             filter_ = input("Choose Filter or enter 1 to exit ")
+
             if filter_ == "1":
                 break
             elif filter_ in self.filters:
