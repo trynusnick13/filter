@@ -21,9 +21,10 @@ class Command(metaclass=ABCMeta):
 
 class ConcreteCommand(Command):
 
-    def __init__(self, image, backup, args, kwargs):
+    def __init__(self, image, backup, name=None):
         self.image = image
         self.backup = backup
+        self.name = name
 
     def undo(self):
         self.image = self.backup

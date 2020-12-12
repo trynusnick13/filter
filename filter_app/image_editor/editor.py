@@ -7,6 +7,7 @@ from tkinter import filedialog
 from filter_app.commands.history import CommandHistory
 from filter_app.filters.filter import CompoundFilter
 from filter_app.image.base_image import Image
+from filter_app.commands.FaceDetectCommand import FaceDetectCommand
 
 
 class ImageEditor:
@@ -28,13 +29,35 @@ class ImageEditor:
         self.image = Image(file_name, im)
         # print(tail[1], im.format, im.mode, im.size)
 
-    def create_chain(self, commands):
-        chain1 = CompoundFilter("face detect filters")
+    def create_chain(self, commands, name):
+        chain1 = CompoundFilter(name)
         self.dict_of_chains[chain1.name] = chain1
         for command in commands:
             chain1.add(command)
 
+    def create_facedetec_chain(self):
+        self.create_chain([FaceDetectCommand(self.image, "face detect")], "face detect filters")
+
+    def user_input(self):
+        while True:
+            print(self.dict_of_chains.keys())
+            action = input("Choose Action or enter 1 to exit")
+            if action == "1":
+                break
+            elif action in self.dict_of_chains.keys():
+                self.dict_of_chains[action].apply_filter()
+
     def filtering(self):
         while True:
-            self.load_image()
-            break
+            print("Choose photo enter a or enter 1 to exit")
+            # a = input()
+            if True:
+                self.load_image()
+                self.create_facedetec_chain()
+                self.user_input()
+            if False:
+                break
+
+if __name__ == '__main__':
+    app = ImageEditor()
+    app.filtering()
