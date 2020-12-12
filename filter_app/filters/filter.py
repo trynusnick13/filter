@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from filter_app.commands import *
 
 
 class Filter(metaclass=ABCMeta):
@@ -23,10 +24,15 @@ class ImageFilter(Filter):
 
 class CompoundFilter(Filter):
 
-    def __init__(self, image):
+    def __init__(self, name, image=None):
         self.filters = []
         self.image = image
+        self.name = name
 
     def apply_filter(self):
         # handover execution to the filters in the filters list
+        pass
+
+    def add(self, filter_):
+        self.filters.append(filter_)
         pass

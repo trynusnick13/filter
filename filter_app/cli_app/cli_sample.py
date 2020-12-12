@@ -33,10 +33,13 @@ class ImageEditor:
     def _rollback(self):
         pass
 
+    def create_chain(self):
+        pass
+
     def filtering(self):
         while True:
             nav = input('Enter filter group please: ')
-            if 'A' in nav:
+            if 'Face Detect' in nav:
                 filter_specific = input(f'enter filter you want to use {A.array}: ')
                 for i in A.array:
                     if str(i).endswith(filter_specific + "'>"):
