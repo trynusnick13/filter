@@ -1,14 +1,15 @@
-from PIL import Image,ImageEnhance
+from PIL import Image, ImageEnhance
 import PIL
 from filter_app.filters.filter import ImageFilter
 from filter_app.image.base_image import Image
+
 
 class Contrast(ImageFilter):
     def __init__(self, image, name_of_filter):
         self.image = image.pillow_image
         self.name_of_filter = name_of_filter
 
-    def contrast(self):
+    def _contrast(self):
         enhancer = ImageEnhance.Contrast(self.image)
         factor = int(input("enter a factor "))
         im_convert = enhancer.enhance(factor)
@@ -17,10 +18,9 @@ class Contrast(ImageFilter):
     def apply_filter(self):
         self.contrast()
 
+
 if __name__ == '__main__':
     img = PIL.Image.open("./photos/test4.png")
     base_image = Image("contrast photo", img)
     test_image = Contrast(base_image, "change contrast")
     test_image.apply_filter()
-
-
