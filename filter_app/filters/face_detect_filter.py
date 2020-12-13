@@ -37,9 +37,15 @@ class FaceDetectFilter(ImageFilter):
         plt.title(f'Found {len(self.faces)} faces!!!')
         plt.show()
 
+    @staticmethod
+    def _save_image(filename='untitled', image=None):
+        cv2.imwrite(filename, image)
+
     def apply_filter(self):
         self._detect_faces()
         self._put_rectangle_on_face()
+
+
 
 
 if __name__ == '__main__':
@@ -47,5 +53,4 @@ if __name__ == '__main__':
     base_image = Image("18 people", pil_image)
     a = FaceDetectFilter(base_image, 'face detect filter')
     a.apply_filter()
-
     # find_face('./photos/test0.jpg')
