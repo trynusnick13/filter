@@ -26,6 +26,6 @@ class NegativeFilter(ImageFilter):
 
 if __name__ == '__main__':
     img = PIL.Image.open("./photos/test4.png")
-    base_image = Image("black and white photo", img)
-    test_image = NegativeFilter(base_image, "black and white filter")
+    base_image = Image("negative photo", img)
+    test_image = NegativeFilter(base_image, "negative filter")
     test_image.apply_filter()
