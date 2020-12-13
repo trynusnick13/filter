@@ -37,7 +37,7 @@ class CompoundFilter(Filter):
             if filter_ == "1":
                 break
             elif filter_ in self.filters:
-                if self.filters[filter_] is Command:
+                if isinstance(self.filters[filter_], Command):
                     self.filters[filter_].execute()
 
     def add(self, filter_):
