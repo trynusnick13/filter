@@ -16,7 +16,7 @@ class Contrast(ImageFilter):
         PIL.Image._show(im_convert)
 
     def apply_filter(self):
-        self.contrast()
+        self._contrast()
 
 
 if __name__ == '__main__':
