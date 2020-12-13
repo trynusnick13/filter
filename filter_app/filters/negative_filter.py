@@ -12,12 +12,12 @@ class NegativeFilter(ImageFilter):
     def _negative(self):
         for i in range(0, self.image.size[0] - 1):
             for j in range(0, self.image.size[1] - 1):
-                pixelColorVals = self.image.getpixel((i, j))
-                redPixel = 255 - pixelColorVals[0]
-                greenPixel = 255 - pixelColorVals[1]
-                bluePixel = 255 - pixelColorVals[2]
+                pixel_color_vals = self.image.getpixel((i, j))
+                red_pixel = 255 - pixel_color_vals[0]
+                green_pixel = 255 - pixel_color_vals[1]
+                blue_pixel = 255 - pixel_color_vals[2]
 
-                self.image.putpixel((i, j), (redPixel, greenPixel, bluePixel))
+                self.image.putpixel((i, j), (red_pixel, green_pixel, blue_pixel))
         PIL.Image._show(self.image)
 
     def apply_filter(self):
