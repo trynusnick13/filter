@@ -42,11 +42,13 @@ class CompoundFilter(Filter):
             if filter_ == "1":
                 return active_image, self.local_history.history
             if filter_ == "2":
-                active_image = self.local_history.pop()
+                pop_image = self.local_history.pop()
+                active_image = self.local_history.history[-1].image
             elif filter_ in self.filters:
                 if isinstance(self.filters[filter_], Command):
                     self.filters[filter_].make_backup()
-                    active_image = self.filters[filter_].execute(active_image)
+                    self.filters[filter_].image = active_image
+                    active_image = self.filters[filter_].execute()
                     self.local_history.push(self.filters[filter_])
                     print(self.local_history.history)
                 else:
