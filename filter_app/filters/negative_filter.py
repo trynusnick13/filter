@@ -22,7 +22,7 @@ class NegativeFilter(ImageFilter):
         return self.image
 
     def apply_filter(self):
-        return self._negative()
+        return Image("negative filter", self._negative())
 
 
 if __name__ == '__main__':
