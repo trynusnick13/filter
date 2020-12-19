@@ -11,10 +11,10 @@ class BlackAndWhiteFilter(ImageFilter):
 
     def _black_and_white(self):
         bw_image = self.image.convert("L")
-        PIL.Image._show(bw_image)
+        return bw_image
 
     def apply_filter(self):
-        self._black_and_white()
+        return self._black_and_white()
 
 
 if __name__ == '__main__':
@@ -22,5 +22,6 @@ if __name__ == '__main__':
     base_image = Image("black and white photo", img)
     test_image = BlackAndWhiteFilter(base_image, "black and white filter")
     test_image.apply_filter()
+    PIL.Image._show(test_image.apply_filter())
 
 
