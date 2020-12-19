@@ -11,7 +11,7 @@ class BlackAndWhiteFilter(ImageFilter):
 
     def _black_and_white(self):
         bw_image = self.image.convert("L")
-        return bw_image
+        return Image("black and white", bw_image)
 
     def apply_filter(self):
         return self._black_and_white()
