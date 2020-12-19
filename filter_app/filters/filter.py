@@ -35,6 +35,10 @@ class CompoundFilter(Filter):
 
     def apply_filter(self):
         active_image = self.image
+
+        def _update_img():
+            for filter_ in self.filters:
+                self.filters[filter_].image = active_image
         while True:
             print(self.filters.keys())
             filter_ = input("Choose FILTER or enter 1 to exit, print 2 to Undo ")
@@ -42,13 +46,14 @@ class CompoundFilter(Filter):
             if filter_ == "1":
                 return active_image, self.local_history.history
             if filter_ == "2":
-                pop_image = self.local_history.pop()
-                active_image = self.local_history.history[-1].image
+                active_image = self.local_history.pop()
+                # active_image = self.local_history.history[-1].image
             elif filter_ in self.filters:
                 if isinstance(self.filters[filter_], Command):
-                    self.filters[filter_].make_backup()
                     self.filters[filter_].image = active_image
+                    self.filters[filter_].make_backup()
                     active_image = self.filters[filter_].execute()
+                    _update_img()
                     self.local_history.push(self.filters[filter_])
                     print(self.local_history.history)
                 else:

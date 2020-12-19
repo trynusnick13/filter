@@ -8,6 +8,12 @@ from filter_app.commands.history import CommandHistory
 from filter_app.filters.filter import CompoundFilter
 from filter_app.image.base_image import Image
 from filter_app.commands.FaceDetectCommand import FaceDetectCommand
+from filter_app.commands.rotate_command import RotateCommand
+from filter_app.commands.black_white_command import BlackAndWhiteCommand
+from filter_app.commands.brightness_command import BrightnessCommand
+from filter_app.commands.sepia_command import SepiaCommand
+from filter_app.commands.negative_command import NegativeCommand
+from filter_app.commands.contrast_command import ContrastCommand
 
 
 class ImageEditor:
@@ -42,22 +48,42 @@ class ImageEditor:
     def create_facedetec_chain(self):
         self.create_chain([FaceDetectCommand(self.image, "face detect")], "face detect filters")
 
+    def create_rotate_chain(self):
+        self.create_chain([RotateCommand(self.image, "rotate image")], "rotate filter")
+
+    def create_color_chain(self):
+        self.create_chain([BlackAndWhiteCommand(self.image, "BW"),
+                           BrightnessCommand(self.image, "Brightness"),
+                           SepiaCommand(self.image, "Sepia"),
+                            NegativeCommand(self.image, "Negative"),
+                            ContrastCommand(self.image, "Contrast")], "Color")
+
+    def update_img_in_chains(self):
+        for chain in self.dict_of_chains:
+            self.dict_of_chains[chain].image = self.image
+
     def user_input(self):
         while True:
             print(self.dict_of_chains.keys())
-            action = input("Choose ACTION or enter 1 to exit")
+            action = input("Choose ACTION or enter 1 to exit, 2 to undo")
             if action == "1":
                 break
+            if action == "2":
+                self.image = self.command_history.pop()
             elif action in self.dict_of_chains.keys():
+                self.dict_of_chains[action].local_history.history = deepcopy(self.command_history.history)
                 self.image, diff_history = self.dict_of_chains[action].apply_filter()
-                self.command_history.history.extend(diff_history)
+                self.command_history.history = diff_history
                 print(self.command_history.history)
+                self.update_img_in_chains()
 
     def filtering(self):
         self.load_image()
         while True:
             if True:
                 self.create_facedetec_chain()
+                self.create_rotate_chain()
+                self.create_color_chain()
                 self.user_input()
                 self.image.save_file()
             print("Enter 1 to exit")
