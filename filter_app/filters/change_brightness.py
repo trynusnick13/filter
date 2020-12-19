@@ -13,7 +13,7 @@ class ChangeBrightness(ImageFilter):
         enhancer = ImageEnhance.Brightness(self.image)
         factor = int(input("enter a factor "))
         im_convert = enhancer.enhance(factor)
-        return im_convert
+        return Image("updated brightness", im_convert)
 
 
 
