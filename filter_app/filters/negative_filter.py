@@ -8,8 +8,8 @@ class NegativeFilter(ImageFilter):
     def __init__(self, image, name_of_filter):
         self.image = image.pillow_image
         self.name_of_filter = name_of_filter
-
     def _negative(self):
+
         for i in range(0, self.image.size[0] - 1):
             for j in range(0, self.image.size[1] - 1):
                 pixel_color_vals = self.image.getpixel((i, j))
@@ -18,14 +18,17 @@ class NegativeFilter(ImageFilter):
                 blue_pixel = 255 - pixel_color_vals[2]
 
                 self.image.putpixel((i, j), (red_pixel, green_pixel, blue_pixel))
-        PIL.Image._show(self.image)
+
+        return self.image
 
     def apply_filter(self):
-        self._negative()
+        return self._negative()
 
 
 if __name__ == '__main__':
     img = PIL.Image.open("./photos/test4.png")
     base_image = Image("negative photo", img)
     test_image = NegativeFilter(base_image, "negative filter")
-    test_image.apply_filter()
+    PIL.Image._show(test_image.apply_filter())
+
+
