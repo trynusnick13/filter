@@ -13,14 +13,18 @@ class ChangeBrightness(ImageFilter):
         enhancer = ImageEnhance.Brightness(self.image)
         factor = int(input("enter a factor "))
         im_convert = enhancer.enhance(factor)
-        PIL.Image._show(im_convert)
+        return im_convert
+
+
+
+
 
     def apply_filter(self):
-        self._change_brightness()
+        return self._change_brightness()
 
 
 if __name__ == '__main__':
     img = PIL.Image.open("./photos/test4.png")
     base_image = Image("bright photo", img)
     test_image = ChangeBrightness(base_image, "change brightness")
-    test_image.apply_filter()
+    PIL.Image._show(test_image.apply_filter())
