@@ -16,9 +16,11 @@ class FaceDetectCommand(ConcreteCommand):
     def save_image(self):
         self.backup = self.image
 
-    def execute(self):
-        face_detect_filter = FaceDetectFilter(image=self.image, name_of_filter='face detect filter' + self.image.name)
-        face_detect_filter.apply_filter()
+    def execute(self, new_image=None):
+        if not(new_image is None):
+            self.image = new_image
+        face_detect_filter = FaceDetectFilter(image=new_image, name_of_filter='face detect filter' + self.image.name)
+        return face_detect_filter.apply_filter()
 
 
 if __name__ == '__main__':

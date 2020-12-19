@@ -34,7 +34,7 @@ class ImageEditor:
         tail = None
 
     def create_chain(self, commands, name):
-        chain1 = CompoundFilter(name)
+        chain1 = CompoundFilter(name, self.image)
         self.dict_of_chains[chain1.name] = chain1
         for command in commands:
             chain1.add(command)
@@ -49,7 +49,7 @@ class ImageEditor:
             if action == "1":
                 break
             elif action in self.dict_of_chains.keys():
-                self.dict_of_chains[action].apply_filter()
+               self.image = self.dict_of_chains[action].apply_filter()
 
     def filtering(self):
         self.load_image()

@@ -13,7 +13,7 @@ class FaceDetectFilter(ImageFilter):
     def __init__(self, image, name_of_filter):
         self.image = image.pillow_image
         self.name_of_filter = name_of_filter
-        self.opencv_image = cv2.cvtColor(numpy.array(self.image), cv2.COLOR_RGB2BGR)
+        self.opencv_image = cv2.cvtColor(numpy.array(self.image), cv2.COLOR_BGR2RGB)
 
     def _detect_faces(self):
         faceCascade = cv2.CascadeClassifier(self.cascPath)
@@ -29,13 +29,9 @@ class FaceDetectFilter(ImageFilter):
     def _put_rectangle_on_face(self):
         for (x, y, width, height) in self.faces:
             cv2.rectangle(self.opencv_image, (x, y), (x + width, y + height), (255, 105, 180), 2)
-        im2 = self.opencv_image.copy()
-        im2[:, :, 0] = self.opencv_image[:, :, 2]
-        im2[:, :, 2] = self.opencv_image[:, :, 0]
-        plt.imshow(im2)
-        plt.xticks([]), plt.yticks([])
-        plt.title(f'Found {len(self.faces)} faces!!!')
-        plt.show()
+
+        im_pil = PIL.Image.fromarray(self.opencv_image)
+        return Image("updated image", im_pil)
 
     @staticmethod
     def _save_image(filename='untitled', image=None):
@@ -43,7 +39,7 @@ class FaceDetectFilter(ImageFilter):
 
     def apply_filter(self):
         self._detect_faces()
-        self._put_rectangle_on_face()
+        return self._put_rectangle_on_face()
 
 
 
