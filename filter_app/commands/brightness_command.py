@@ -19,8 +19,8 @@ class BrightnessCommand(ConcreteCommand):
     def execute(self, new_image=None):
         if not(new_image is None):
             self.image = new_image
-        rotate_filter = ChangeBrightness(image=self.image, name_of_filter='change brightness command' + self.image.name)
-        return rotate_filter.apply_filter()
+        brightness_filter = ChangeBrightness(image=self.image, name_of_filter='change brightness command' + self.image.name)
+        return brightness_filter.apply_filter()
 
 
 if __name__ == '__main__':
