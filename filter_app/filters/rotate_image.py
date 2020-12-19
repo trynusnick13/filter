@@ -13,7 +13,7 @@ class Rotate(ImageFilter):
 
     def _rotate_image(self):
         im_rot = np.rot90(self.np_image)
-        return PIL.Image.fromarray(im_rot)
+        return Image("rotated image", PIL.Image.fromarray(im_rot))
 
     def apply_filter(self):
         return self._rotate_image()
