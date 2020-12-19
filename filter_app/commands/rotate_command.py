@@ -19,7 +19,7 @@ class RotateCommand(ConcreteCommand):
     def execute(self, new_image=None):
         if not(new_image is None):
             self.image = new_image
-        rotate_filter = Rotate(image=self.image, name_of_filter='face detect filter' + self.image.name)
+        rotate_filter = Rotate(image=self.image, name_of_filter='rotate filter' + self.image.name)
         return rotate_filter.apply_filter()
 
 
