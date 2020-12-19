@@ -20,7 +20,7 @@ class FaceDetectFilter(ImageFilter):
         gray = cv2.cvtColor(self.opencv_image, cv2.COLOR_RGB2GRAY)
         self.faces = faceCascade.detectMultiScale(
             gray,
-            scaleFactor=1.2,
+            scaleFactor=1.1,
             minNeighbors=5,
             minSize=(30, 30)
 
