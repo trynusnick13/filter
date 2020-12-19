@@ -5,8 +5,9 @@ class CommandHistory:
     def push(self, command):
         self.history.append(command)
 
-    def pop(self,):
-        return self.history.pop()
+    def pop(self):
+        last_command = self.history.pop()
+        return last_command.backup
 # TODO: write test case
 # a = CommandHistory()
 # a.push(1)

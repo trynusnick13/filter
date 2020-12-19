@@ -29,7 +29,7 @@ class ConcreteCommand(Command):
     def undo(self):
         self.image = self.backup
 
-    def save_image(self):
+    def make_backup(self):
         self.backup = self.image
 
     def execute(self):

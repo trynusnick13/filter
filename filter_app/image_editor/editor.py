@@ -49,7 +49,9 @@ class ImageEditor:
             if action == "1":
                 break
             elif action in self.dict_of_chains.keys():
-               self.image = self.dict_of_chains[action].apply_filter()
+                self.image, diff_history = self.dict_of_chains[action].apply_filter()
+                self.command_history.history.extend(diff_history)
+                print(self.command_history.history)
 
     def filtering(self):
         self.load_image()
