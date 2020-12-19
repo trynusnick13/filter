@@ -31,10 +31,10 @@ class SepiaFilter(ImageFilter):
                 if c > 255:
                     c = 255
                 draw.point((i, j), (a, b, c))
-        PIL.Image._show(self.image)
+        return self.image
 
     def apply_filter(self):
-        self._sepia()
+        return self._sepia()
 
 
 if __name__ == '__main__':
@@ -42,3 +42,4 @@ if __name__ == '__main__':
     base_image = Image("sepia photo", img)
     test_image = SepiaFilter(base_image, "sepia filter")
     test_image.apply_filter()
+    PIL.Image._show(test_image.apply_filter())
