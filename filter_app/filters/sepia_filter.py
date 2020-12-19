@@ -31,7 +31,7 @@ class SepiaFilter(ImageFilter):
                 if c > 255:
                     c = 255
                 draw.point((i, j), (a, b, c))
-        return self.image
+        return Image("sepia filter", self.image)
 
     def apply_filter(self):
         return self._sepia()
