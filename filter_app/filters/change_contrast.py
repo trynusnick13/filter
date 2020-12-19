@@ -13,7 +13,7 @@ class Contrast(ImageFilter):
         enhancer = ImageEnhance.Contrast(self.image)
         factor = int(input("enter a factor "))
         im_convert = enhancer.enhance(factor)
-        return im_convert
+        return Image("contrast filter", im_convert)
 
 
     def apply_filter(self):
