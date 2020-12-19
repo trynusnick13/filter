@@ -39,6 +39,8 @@ class CompoundFilter(Filter):
             elif filter_ in self.filters:
                 if isinstance(self.filters[filter_], Command):
                     self.filters[filter_].execute()
+                else:
+                    self.filters[filter_].apply_filter()
 
     def add(self, filter_):
         self.filters[filter_.name] = filter_
