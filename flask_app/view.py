@@ -1,16 +1,30 @@
 import os
 
-from flask import request, redirect, url_for
 from flask import render_template
+from flask import request, redirect, url_for
 from werkzeug.utils import secure_filename
 
+from filter_app.commands.FaceDetectCommand import FaceDetectCommand
+from filter_app.commands.black_white_command import BlackAndWhiteCommand
+from filter_app.commands.brightness_command import BrightnessCommand
+from filter_app.commands.contrast_command import ContrastCommand
+from filter_app.commands.negative_command import NegativeCommand
+from filter_app.commands.rotate_command import RotateCommand
+from filter_app.commands.sepia_command import SepiaCommand
 from flask_app.app import app
 from flask_app.config import ALLOWED_EXTENSIONS
-from filter_app.commands.FaceDetectCommand import FaceDetectCommand
-from filter_app.image.base_image import Image
-import PIL
-import datetime
+from flask_app.utils.apply_command import apply_commands
 
+commands = {"FaceDetectCommand": FaceDetectCommand,
+            "BlackWhite": BlackAndWhiteCommand,
+            "Brightness": BrightnessCommand,
+            "Sepia": SepiaCommand,
+            "Contrast": ContrastCommand,
+            "Negative": NegativeCommand,
+            "rotate_90": RotateCommand,
+            }
+
+commands_history = []
 current_file = []
 
 
@@ -35,37 +49,28 @@ def upload_file():
 
 @app.route('/choose_filter/<filename>')
 def uploaded_file(filename):
-    return render_template("filter_type.html", filename=filename)
+    return render_template("filter_type.html", filename=filename, commands_history=commands_history)
 
 
 @app.route('/choose_filter/face_detect/<filename>')
 def face_detect_view(filename):
-    return render_template("filter_choose_1.html", filename=filename)
+    return render_template("filter_choose_1.html", filename=filename, commands_history=commands_history)
 
 
-@app.route('/choose_filter/face_detect/apply/<filename>')
-def apply_face_detect(filename):
-    pil_image = PIL.Image.open(f'./static/{filename}')
-    base_image = Image("temp-name", pil_image)
-    a = FaceDetectCommand(base_image)
-    new_file = a.execute()
-    timestamp_now = datetime.datetime.now()
-    path = "./static/"
-    new_file.name = f"{timestamp_now.timestamp()}-{filename}"
-    new_file.save_file(name=path+new_file.name)
-    return redirect(url_for('uploaded_file', filename=new_file.name))
+@app.route('/choose_filter/color/<filename>')
+def color_view(filename):
+    return render_template("filter_choose_3.html", filename=filename)
 
 
-if __name__ == '__main__':
-    filename = "aaa4.png"
-    timestamp_now = datetime.datetime.now()
-    pil_image = PIL.Image.open(f'./static/{filename}')
-    base_image = Image("jacky chan", pil_image)
-    a = FaceDetectCommand(base_image)
-    new_file = a.execute()
-    new_file.name = f"./static/{timestamp_now.timestamp()}-{filename}"
-    new_file.save_file(name=new_file.name)
+@app.route('/choose_filter/rotate/<filename>')
+def rotate_view(filename):
+    return render_template("filter_choose_2.html", filename=filename, commands_history=commands_history)
 
-    # PIL.Image._show(a.execute().pillow_image)
+
+@app.route('/choose_filter/face_detect/apply/<command>/<filename>')
+def apply_command(command, filename):
+    new_filename = apply_commands(commands[command], filename)
+    commands_history.append(commands[command].apply_name)
+    return redirect(url_for('uploaded_file', filename=new_filename))
 
 
