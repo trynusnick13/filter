@@ -16,9 +16,7 @@
 			<div class="button_wrapper">
 				<div>
 					<div class="div_button">
-						<a href=" {{ url_for('apply_face_detect', filename=filename)}}">
-						<a class="filter_button" id="face_detect">Face Detect</a>
-						</a>
+						<a class="filter_button" id="face_detect" href="{{ url_for('apply_command', command='FaceDetectCommand', filename=filename)}}">Face Detect</a>
 					</div>
 				</div>
 				<div>
@@ -35,6 +33,9 @@
 			</div>
 			<div class="history_wrapper">
 				<p>History</p>
+				{% for command in commands_history %}
+				<h3> {{ command }}</h3>
+				{% endfor %}
 			</div>
 		</div>
 	</body>

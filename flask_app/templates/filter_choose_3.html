@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Filter</title>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	</head>
 
 	<body>
@@ -16,19 +16,19 @@
 			<div class="button_wrapper">
 				<div>
 					<div class="div_button">
-						<a href="" class="filter_button" id="bw">Black&White</a>
+						<a class="filter_button" id="bw" href="{{ url_for('apply_command', command='BlackWhite', filename=filename)}}">Black&White</a>
 					</div>
 					<div class="div_button">
-						<a class="filter_button" id="brightness">Brightness</a>
+						<a class="filter_button" id="brightness" href="{{ url_for('apply_command', command='Brightness', filename=filename)}}">Brightness</a>
 					</div>
 					<div class="div_button">
-						<a href="" class="filter_button" id="sepia">Sepia</a>
+						<a class="filter_button" id="sepia" href="{{ url_for('apply_command', command='Sepia', filename=filename)}}">Sepia</a>
 					</div>
 					<div class="div_button">
-						<a class="filter_button" id="contrast">Contrast</a>
+						<a class="filter_button" id="contrast" href="{{ url_for('apply_command', command='Contrast', filename=filename)}}">Contrast</a>
 					</div>
 					<div class="div_button">
-						<a class="filter_button" id="negative">Negative</a>
+						<a class="filter_button" id="negative" href="{{ url_for('apply_command', command='Negative', filename=filename)}}">Negative</a>
 					</div>
 				</div>
 				<div>
@@ -41,10 +41,13 @@
 				</div>
 			</div>
 			<div class="prewiev_wrapper">
-				<img src="dog-test.jpg" alt="Your image can't load :c">
+				<img src="{{ url_for('static', filename=filename) }}" alt="Your image can't load :c">
 			</div>
 			<div class="history_wrapper">
 				<p>History</p>
+				{% for command in commands_history %}
+				<h3> {{ command }}</h3>
+				{% endfor %}
 			</div>
 		</div>
 	</body>
