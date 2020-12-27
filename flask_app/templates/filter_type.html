@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Filter</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		
 	</head>
 
 	<body>
@@ -15,22 +16,22 @@
 			</div>
 			<div class="button_wrapper">
 				<div>
-					<div>
+					<div class="div_button">
 						<a class="filter_button" id="face_detect" href=" {{ url_for('face_detect_view', filename=filename)}}">Face Detect</a>
 					</div>
-					<div>
+					<div class="div_button">
 						<a class="filter_button" id="rotate">Rotate</a>
 					</div>
-					<div>
+					<div class="div_button">
 						<a class="filter_button" id="color_filters" >Color Filters</a>
 					</div>
 				</div>
 				<div>
-					<div>
-						<button class="save">Save</button>
+					<div class="div_button">
+						<a class="save">Save</a>
 					</div>
-					<div>
-						<button class="undo">Undo</button>
+					<div class="div_button">
+						<a class="undo">Undo</a>
 					</div>
 				</div>
 			</div>
