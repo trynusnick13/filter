@@ -28,10 +28,13 @@
 				</div>
 				<div>
 					<div class="div_button">
-						<a class="save">Save</a>
+						<a class="save" href="{{ url_for('get_image' , filename=filename)}}">Save </a>
 					</div>
 					<div class="div_button">
-						<a class="undo">Undo</a>
+						<a class="undo" href="{{ url_for('undo')}}">Undo</a>
+					</div>
+					<div class="div_button">
+						<a class="undo" href="{{ url_for('upload_file')}}">Go Back</a>
 					</div>
 				</div>
 			</div>
@@ -41,7 +44,7 @@
 			<div class="history_wrapper">
 				<p>History</p>
 				{% for command in commands_history %}
-				<h3> {{ command }}</h3>
+				<h3> {{ command[0] }}</h3>
 				{% endfor %}
 			</div>
 		</div>

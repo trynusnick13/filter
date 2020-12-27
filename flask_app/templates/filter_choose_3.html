@@ -33,10 +33,7 @@
 				</div>
 				<div>
 					<div class="div_button">
-						<a class="undo" id="go_back">Go Back</a>
-					</div>
-					<div class="div_button">
-						<a class="undo">Undo</a>
+						<a class="undo" href="{{ url_for('uploaded_file', filename=filename)}}">Go Back</a>
 					</div>
 				</div>
 			</div>
@@ -46,7 +43,7 @@
 			<div class="history_wrapper">
 				<p>History</p>
 				{% for command in commands_history %}
-				<h3> {{ command }}</h3>
+				<h3> {{ command[0] }}</h3>
 				{% endfor %}
 			</div>
 		</div>
