@@ -2,7 +2,7 @@ from PIL import Image, ImageEnhance
 import PIL
 from filter_app.filters.filter import ImageFilter
 from filter_app.image.base_image import Image
-
+from filter_app.config_filter.config_default import DEFAULT_FACTOR
 
 class ChangeBrightness(ImageFilter):
     def __init__(self, image, name_of_filter):
@@ -11,8 +11,8 @@ class ChangeBrightness(ImageFilter):
 
     def _change_brightness(self):
         enhancer = ImageEnhance.Brightness(self.image)
-        factor = int(input("enter a factor "))
-        im_convert = enhancer.enhance(factor)
+        # factor = int(input("enter a factor "))
+        im_convert = enhancer.enhance(DEFAULT_FACTOR)
         return Image("updated brightness", im_convert)
 
 

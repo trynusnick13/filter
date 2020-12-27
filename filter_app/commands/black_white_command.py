@@ -5,6 +5,7 @@ import PIL
 
 
 class BlackAndWhiteCommand(ConcreteCommand):
+    apply_name = "Applied black & white filter"
 
     def __init__(self, image, name=None):
         self.image = image

@@ -2,6 +2,7 @@ from PIL import Image, ImageEnhance
 import PIL
 from filter_app.filters.filter import ImageFilter
 from filter_app.image.base_image import Image
+from filter_app.config_filter.config_default import DEFAULT_FACTOR
 
 
 class Contrast(ImageFilter):
@@ -11,8 +12,8 @@ class Contrast(ImageFilter):
 
     def _contrast(self):
         enhancer = ImageEnhance.Contrast(self.image)
-        factor = int(input("enter a factor "))
-        im_convert = enhancer.enhance(factor)
+        # factor = int(input("enter a factor "))
+        im_convert = enhancer.enhance(DEFAULT_FACTOR)
         return Image("contrast filter", im_convert)
 
 

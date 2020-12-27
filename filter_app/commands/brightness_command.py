@@ -5,6 +5,7 @@ import PIL
 
 
 class BrightnessCommand(ConcreteCommand):
+    apply_name = "Applied brightness filter"
 
     def __init__(self, image, name=None):
         self.image = image

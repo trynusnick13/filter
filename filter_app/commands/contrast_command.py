@@ -5,6 +5,7 @@ import PIL
 
 
 class ContrastCommand(ConcreteCommand):
+    apply_name = "Applied contrast filter"
 
     def __init__(self, image, name=None):
         self.image = image

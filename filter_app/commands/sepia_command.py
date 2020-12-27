@@ -5,6 +5,7 @@ import PIL
 
 
 class SepiaCommand(ConcreteCommand):
+    apply_name = "Applied sepia filter"
 
     def __init__(self, image, name=None):
         self.image = image

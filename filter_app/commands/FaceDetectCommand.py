@@ -5,6 +5,7 @@ import PIL
 
 
 class FaceDetectCommand(ConcreteCommand):
+    apply_name = "Applied Face Detect filter"
 
     def __init__(self, image, name=None):
         self.image = image

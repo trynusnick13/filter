@@ -5,6 +5,7 @@ import PIL
 
 
 class RotateCommand(ConcreteCommand):
+    apply_name = "Applied rotate filter"
 
     def __init__(self, image, name=None):
         self.image = image

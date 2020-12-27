@@ -5,6 +5,7 @@ import PIL
 
 
 class NegativeCommand(ConcreteCommand):
+    apply_name = "Applied negative filter"
 
     def __init__(self, image, name=None):
         self.image = image
