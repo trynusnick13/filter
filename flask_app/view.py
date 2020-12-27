@@ -2,6 +2,7 @@ import os
 
 from flask import render_template
 from flask import request, redirect, url_for
+from flask import send_file
 from werkzeug.utils import secure_filename
 
 from filter_app.commands.FaceDetectCommand import FaceDetectCommand
@@ -15,7 +16,7 @@ from flask_app.app import app
 from flask_app.config import ALLOWED_EXTENSIONS
 from flask_app.utils.apply_command import apply_commands
 
-commands = {"FaceDetectCommand": FaceDetectCommand,
+COMMANDS = {"FaceDetectCommand": FaceDetectCommand,
             "BlackWhite": BlackAndWhiteCommand,
             "Brightness": BrightnessCommand,
             "Sepia": SepiaCommand,
@@ -23,6 +24,9 @@ commands = {"FaceDetectCommand": FaceDetectCommand,
             "Negative": NegativeCommand,
             "rotate_90": RotateCommand,
             }
+
+PATH = "static/"
+
 
 commands_history = []
 current_file = []
@@ -39,7 +43,7 @@ def upload_file():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            current_file.append(filename)
+            commands_history.append(tuple(["Start", filename]))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
@@ -69,8 +73,21 @@ def rotate_view(filename):
 
 @app.route('/choose_filter/face_detect/apply/<command>/<filename>')
 def apply_command(command, filename):
-    new_filename = apply_commands(commands[command], filename)
-    commands_history.append(commands[command].apply_name)
+    new_filename = apply_commands(COMMANDS[command], filename)
+    commands_history.append(tuple([COMMANDS[command].apply_name, new_filename]))
     return redirect(url_for('uploaded_file', filename=new_filename))
 
 
+@app.route('/get_image/<filename>')
+def get_image(filename):
+    return send_file(PATH+filename, mimetype='image/gif')
+
+
+@app.route('/undo_command/')
+def undo():
+    try:
+        commands_history.pop()
+        filename = commands_history[-1][1]
+        return redirect(url_for('uploaded_file', filename=filename))
+    except IndexError:
+        return redirect(url_for('upload_file'))
