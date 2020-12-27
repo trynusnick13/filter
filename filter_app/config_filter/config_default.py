@@ -1,0 +1,1 @@
+DEFAULT_FACTOR = 3
